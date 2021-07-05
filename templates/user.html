@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{% block username %} {{ user['username'] }} {% endblock %}</h2>
+    <span class="badge badge-primary">{{ user['created'] }}</span>
+    <p>{{ user['userrole'] }}</p>
+{% endblock %}

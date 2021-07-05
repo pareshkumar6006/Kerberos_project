@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block username %} Auth server {% endblock %}</h1>
+    {% for user in users %}
+        <a href="{{ url_for('user', user_id=user['id']) }}">
+            <h2>{{ user['username'] }}</h2>
+        </a>
+        <span class="badge badge-primary">Created : {{ user['created'] }}</span>
+        <a href="{{ url_for('edit', id=user['id']) }}">
+            <span class="badge badge-warning">Edit</span>
+        </a>
+        <hr>
+    {% endfor %}
+{% endblock %}
