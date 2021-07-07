@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block username %} LOGIN {% endblock %}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="name">User Name</label>
+        <input type="text" name="name"
+               placeholder="User Name" class="form-control"
+               value="{{ request.form['name'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input name="password" placeholder="Password"
+                  class="form-control">{{ request.form['password'] }}</input>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+    {% if "error" in loginMsg != "" %}
+    <td id="error"> {{ loginMsg }} </td>
+    {% endif %}
+
+</form>
+{% endblock %}

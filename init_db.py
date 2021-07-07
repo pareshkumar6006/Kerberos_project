@@ -9,8 +9,8 @@ with open('schema.sql') as f:
 cur = connection.cursor()
 
 
-cur.execute("INSERT INTO usersdb (username, userrole, usertoken) VALUES (?, ?, ?)",
-            ('jp', 'admin', 'notatoken')
+cur.execute("INSERT INTO usersdb (username, userrole, usertoken, userpassword) VALUES (?, ?, ?, ?)",
+            ('jp', 'admin', 'notatoken', 'notapassword')
             )
 
 connection.commit()

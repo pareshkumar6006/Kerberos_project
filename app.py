@@ -20,16 +20,44 @@ def get_user(user_id):
         abort(404)
     return user
 
+def get_user_by_name(username, password):
+    conn = get_db_connection()
+    user = conn.execute('SELECT * FROM usersdb WHERE username = ? AND userpassword = ?',
+                        (username, password)).fetchone()
+    conn.close()
+    if user is None:
+        abort(404)
+    return user
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'notasecret'
 
 
-@app.route('/')
+@app.route('/index')
 def index():
     conn = get_db_connection()
     users = conn.execute('SELECT * FROM usersdb').fetchall()
     conn.close()
     return render_template('index.html', users=users)
+
+@app.route('/', methods=('GET', 'POST'))
+def login():
+     loginMsg = ""
+     if request.method == 'POST':
+        username = request.form['name']
+        password = request.form['password']
+        
+        user = get_user_by_name(username, password)
+        print(user)
+        if(user):
+            conn = get_db_connection()
+            users = conn.execute('SELECT * FROM usersdb').fetchall()
+            conn.close()
+            return render_template('index.html', users=users)
+        else:
+            return render_template('login.html', loginMsg="Failed Login. Please check credentials again.")
+
+     return render_template('login.html', loginMsg=loginMsg)
 
 @app.route('/<int:user_id>')
 def user(user_id):

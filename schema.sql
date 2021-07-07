@@ -6,5 +6,6 @@ CREATE TABLE usersdb (
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     username TEXT NOT NULL,
     userrole TEXT NOT NULL,
-    usertoken TEXT NOT NULL
+    usertoken TEXT NOT NULL,
+    userpassword TEXT NOT NULL
 );
